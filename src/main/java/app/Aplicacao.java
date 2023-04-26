@@ -22,9 +22,8 @@ public class Aplicacao {
         get("/produto/update/:id", (request, response) -> produtoService.getToUpdate(request, response));
         
         post("/produto/update/:id", (request, response) -> produtoService.update(request, response));
-           
+
         get("/produto/delete/:id", (request, response) -> produtoService.delete(request, response));
 
-             
     }
 }
