@@ -110,7 +110,7 @@ public class ProdutoService {
 					productString += "\"preco\": " + produto.getPreco() + ",";
 					productString += "\"quantidade\": " + produto.getQuantidade() + ",";
 					productString += "\"descricao\": \"" + produto.getDescricao() + "\"";
-					productString += "}";
+					productString += "},";
 				}
 				productString = productString.substring(0, productString.length() - 1);
 			}
