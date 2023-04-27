@@ -280,6 +280,89 @@ public class UsuarioService {
     	return json;
     }
     
+    public Object update(Request request, Response response) {
+    	
+    	if(!authMiddleware(request)) {
+    		response.status(401);
+    		response.type("application/json");
+    		return json;
+    	}
+    	
+    	String body = request.body();
+    	String name = "";
+    	String username = "";
+    	String cpf = "";
+    	String email = "";
+    	String telefone = "";
+    	String descricao = "";
+    	String cidade = "";
+    	String estado = "";
+    	
+    	String cursor = body.split("\"nome\": \"")[1];
+    	int k = 0;
+    	while(cursor.charAt(k) != '\"') {
+    		name += cursor.charAt(k);
+			k++;
+    	}
+		k = 0;
+    	cursor = body.split("\"username\": \"")[1];
+    	while(cursor.charAt(k) != '\"') {
+    		username += cursor.charAt(k);
+			k++;
+    	}
+		k=0;
+    	cursor = body.split("\"cpf\": ")[1];
+    	while(cursor.charAt(k) != ',') {
+    		cpf += cursor.charAt(k);
+			k++;
+    	}
+		k=0;
+    	cursor = body.split("\"email\": \"")[1];
+    	while(cursor.charAt(k) != '\"') {
+    		email += cursor.charAt(k);
+			k++;
+    	}
+		k=0;
+    	cursor = body.split("\"telefone\": ")[1];
+    	while(cursor.charAt(k) != ',') {
+    		telefone += cursor.charAt(k);
+			k++;
+    	}
+		k=0;
+    	cursor = body.split("\"descricao\": \"")[1];
+    	while(cursor.charAt(k) != '\"') {
+    		descricao += cursor.charAt(k);
+			k++;
+    	}
+		k=0;
+    	cursor = body.split("\"cidade\": \"")[1];
+    	while(cursor.charAt(k) != '\"') {
+    		cidade += cursor.charAt(k);
+			k++;
+    	}
+		k=0;
+    	cursor = body.split("\"estado\": \"")[1];
+    	while(cursor.charAt(k) != '\"') {
+    		estado += cursor.charAt(k);
+			k++;
+    	}
+    	
+    	Usuario usuario = new Usuario(-1, name, username, Long.parseLong(cpf), Integer.parseInt(telefone), email, descricao, cidade, estado);
+    	
+    	if(usuarioDAO.update(usuario) == true) {
+    		response.status(201);
+    		response.type("application/json");
+    		List<Usuario> users = new ArrayList<Usuario>();
+    		users.add(usuario);
+    		makeJson(UPDATE_USER, users);
+    	}else {
+    		response.status(404);
+    		makeJson(ERROR_404);
+    	}
+    	
+    	return json;
+    }
+    
     public Object login(Request request, Response response) {
     	String body = request.body();
     	String username = "";
