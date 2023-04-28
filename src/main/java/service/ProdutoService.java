@@ -1,5 +1,6 @@
 package service;
 
+<<<<<<< HEAD
 import java.util.Scanner;
 import java.util.Set;
 import java.time.LocalDate;
@@ -299,3 +300,8 @@ public class ProdutoService {
     	return json;
     }
 }
+=======
+public class ProdutoService {
+    
+}
+>>>>>>> 2bd5aa5a5d912cb47069330218a5bd29bd7fd3b3
