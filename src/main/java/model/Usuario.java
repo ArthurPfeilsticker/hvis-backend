@@ -11,7 +11,7 @@ public class Usuario {
 	private String login;
 	private String senha;
 	
-	public Usuario() {
+	public void Usuario() {
 		this.idusuario = -1;
         this.nomeusuario = "";
         this.telusuario = "";
@@ -24,8 +24,8 @@ public class Usuario {
 
 	}
 	
-	public Usuario(int.idusuario, String nomeusuario, String telusuario, String cidade, String estado, String descricaousuario, String cpf, String login, String senha,) {
-		this.idusuario =.idusuario;
+	public void Usuario(int idusuario, String nomeusuario, String telusuario, String cidade, String estado, String descricaousuario, String cpf, String login, String senha) {
+		this.idusuario = idusuario;
         this.nomeusuario = nomeusuario;
         this.telusuario = telusuario;
         this.cidade = cidade;
@@ -37,11 +37,11 @@ public class Usuario {
 	}
 
 	public int getIDUsuario() {
-		return.idusuario;
+		return idusuario;
 	}
 
 	public void setIDUsuario(int idusuario) {
-		this.idusuario =.idusuario;
+		this.idusuario = idusuario;
 	}
 
     public String getNomeUsuario() {
@@ -111,6 +111,6 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario .idusuario=" +.idusuario + ", nome=" + nomeusuario + ", telefone=" + telusuario + ", cidade=" + cidade + ", estado=" + estado + ", descrição=" + descricaousuario + ", CPF=" + cpf + ", login=" + login + ", senha=" + senha + "]";
+		return "Usuario .idusuario=" + idusuario + ", nome=" + nomeusuario + ", telefone=" + telusuario + ", cidade=" + cidade + ", estado=" + estado + ", descrição=" + descricaousuario + ", CPF=" + cpf + ", login=" + login + ", senha=" + senha + "]";
 	}	
 }

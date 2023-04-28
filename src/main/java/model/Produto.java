@@ -37,11 +37,11 @@ public class Produto {
 		this.id = id;
 	}
 
-	public int getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(int nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 

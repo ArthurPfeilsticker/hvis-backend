@@ -23,7 +23,7 @@ public class UsuarioDAO extends DAO {
 		try {  
 			Statement st = conexao.createStatement();
 			String sql = "INSERT INTO usuario (idusuario, nomeusuario, telusuario, cidade, estado, descricaousuario, cpf, login, senha) "
-				       + "VALUES ("+usuario.getIDUsuario()+ ", '" + usuario.getNomeUsuario() + ", '" + usuario.getTelUsuario() + ", '" + usuario.getCidade() + ", '" + usuario.getEstado() + ", '" + usuario.getDescricaoUsuario() + ", '" + usuario.getCpf() + ", '" + usuario.getLogin() + "', '" + usuario.getSenha() + "');";
+				+ "VALUES ("+usuario.getIDUsuario()+ ", '" + usuario.getNomeUsuario() + ", '" + usuario.getTelUsuario() + ", '" + usuario.getCidade() + ", '" + usuario.getEstado() + ", '" + usuario.getDescricaoUsuario() + ", '" + usuario.getCpf() + ", '" + usuario.getLogin() + "', '" + usuario.getSenha() + "');";
 			System.out.println(sql);
 			st.executeUpdate(sql);
 			st.close();
@@ -44,7 +44,7 @@ public class UsuarioDAO extends DAO {
 			System.out.println(sql);
 			ResultSet rs = st.executeQuery(sql);	
 	        if(rs.next()){            
-	        	 usuario = new Usuario(rs.getInt("idusuario"), rs.getString("nomeusuario"), rs.getString("telusuario"), rs.getString("cidade"), rs.getString("estado"), rs.getString("descricaousuario"), rs.getString("cpf"), rs.getString("login"), rs.getString("senha"));
+	        	usuario = new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("telefone"), rs.getString("cidade"), rs.getString("estado"), rs.getString("descricao"), rs.getString("cpf"), rs.getString("login"), rs.getString("senha"));
 	        }
 	        st.close();
 		} catch (Exception e) {

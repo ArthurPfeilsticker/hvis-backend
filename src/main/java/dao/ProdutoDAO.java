@@ -28,7 +28,7 @@ public class ProdutoDAO extends DAO {
 		boolean status = false;
 		try {
 			String sql = "INSERT INTO produto (id,nome,descricao, preco, quantidade) "
-		               + "VALUES ('" produto.getID() + ", " + produto.getNome() + ", " + produto.getDescricao() + "', " + produto.getPreco() + ", " + produto.getQuantidade() + ", ?, ?);";
+		        + "VALUES ('" produto.getID() + ", " + produto.getNome() + ", " + produto.getDescricao() + "', " + produto.getPreco() + ", " + produto.getQuantidade() + ", ?, ?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.executeUpdate();
 			st.close();
@@ -48,7 +48,7 @@ public class ProdutoDAO extends DAO {
 			String sql = "SELECT * FROM produto WHERE id="+id;
 			ResultSet rs = st.executeQuery(sql);	
 	        if(rs.next()){            
-	        	 produto = new Produto(rs.getInt("id"), rs.getNome("nome"), rs.getString("descricao"), (float)rs.getDouble("preco"), rs.getInt("quantidade");
+	        	produto = new Produto(rs.getInt("id"), rs.getNome("nome"), rs.getString("descricao"), (float)rs.getDouble("preco"), rs.getInt("quantidade"));
 	        }
 	        st.close();
 		} catch (Exception e) {
@@ -90,7 +90,7 @@ public class ProdutoDAO extends DAO {
 			String sql = "SELECT * FROM produto" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);	           
 	        while(rs.next()) {	            	
-	        	Produto p = new Produto(rs.getInt("id"), rs.getNome("nome"), rs.getString("descricao"), (float)rs.getDouble("preco"), rs.getInt("quantidade");
+	        	Produto p = new Produto(rs.getInt("id"), rs.getNome("nome"), rs.getString("descricao"), (float)rs.getDouble("preco"), rs.getInt("quantidade"));
 	            produtos.add(p);
 	        }
 	        st.close();
@@ -104,7 +104,7 @@ public class ProdutoDAO extends DAO {
 	public boolean update(Produto produto) {
 		boolean status = false;
 		try {  
-			String sql =  "UPDATE produto SET nome = '" + produto.getNome() + "', " "descricao = "  + produto.getDescricao()  + "', " "preco = " + produto.getPreco() + ", " + "quantidade = " + produto.getQuantidade();
+			String sql =  "UPDATE produto SET nome = '" + produto.getNome() + "', descricao = "  + produto.getDescricao()  + "', preco = " + produto.getPreco() + ", quantidade = " + produto.getQuantidade();
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.executeUpdate();
 			st.close();
