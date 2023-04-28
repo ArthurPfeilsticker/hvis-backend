@@ -27,12 +27,9 @@ public class ProdutoDAO extends DAO {
 	public boolean insert(Produto produto) {
 		boolean status = false;
 		try {
-			String sql = "INSERT INTO produto (descricao, preco, quantidade, datafabricacao, datavalidade) "
-		               + "VALUES ('" + produto.getDescricao() + "', "
-		               + produto.getPreco() + ", " + produto.getQuantidade() + ", ?, ?);";
+			String sql = "INSERT INTO produto (id,nome,descricao, preco, quantidade) "
+		        + "VALUES ('" produto.getID() + ", " + produto.getNome() + ", " + produto.getDescricao() + "', " + produto.getPreco() + ", " + produto.getQuantidade() + ", ?, ?);";
 			PreparedStatement st = conexao.prepareStatement(sql);
-		    st.setTimestamp(1, Timestamp.valueOf(produto.getDataFabricacao()));
-			st.setDate(2, Date.valueOf(produto.getDataValidade()));
 			st.executeUpdate();
 			st.close();
 			status = true;
@@ -51,10 +48,7 @@ public class ProdutoDAO extends DAO {
 			String sql = "SELECT * FROM produto WHERE id="+id;
 			ResultSet rs = st.executeQuery(sql);	
 	        if(rs.next()){            
-	        	 produto = new Produto(rs.getInt("id"), rs.getString("descricao"), (float)rs.getDouble("preco"), 
-	                				   rs.getInt("quantidade"), 
-	        			               rs.getTimestamp("datafabricacao").toLocalDateTime(),
-	        			               rs.getDate("datavalidade").toLocalDate());
+	        	produto = new Produto(rs.getInt("id"), rs.getNome("nome"), rs.getString("descricao"), (float)rs.getDouble("preco"), rs.getInt("quantidade"));
 	        }
 	        st.close();
 		} catch (Exception e) {
@@ -71,6 +65,10 @@ public class ProdutoDAO extends DAO {
 	
 	public List<Produto> getOrderByID() {
 		return get("id");		
+	}
+
+	public List<Produto> getOrderByNome() {
+		return get("nome");		
 	}
 	
 	
@@ -92,10 +90,7 @@ public class ProdutoDAO extends DAO {
 			String sql = "SELECT * FROM produto" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);	           
 	        while(rs.next()) {	            	
-	        	Produto p = new Produto(rs.getInt("id"), rs.getString("descricao"), (float)rs.getDouble("preco"), 
-	        			                rs.getInt("quantidade"),
-	        			                rs.getTimestamp("datafabricacao").toLocalDateTime(),
-	        			                rs.getDate("datavalidade").toLocalDate());
+	        	Produto p = new Produto(rs.getInt("id"), rs.getNome("nome"), rs.getString("descricao"), (float)rs.getDouble("preco"), rs.getInt("quantidade"));
 	            produtos.add(p);
 	        }
 	        st.close();
@@ -109,14 +104,8 @@ public class ProdutoDAO extends DAO {
 	public boolean update(Produto produto) {
 		boolean status = false;
 		try {  
-			String sql = "UPDATE produto SET descricao = '" + produto.getDescricao() + "', "
-					   + "preco = " + produto.getPreco() + ", " 
-					   + "quantidade = " + produto.getQuantidade() + ","
-					   + "datafabricacao = ?, " 
-					   + "datavalidade = ? WHERE id = " + produto.getID();
+			String sql =  "UPDATE produto SET nome = '" + produto.getNome() + "', descricao = "  + produto.getDescricao()  + "', preco = " + produto.getPreco() + ", quantidade = " + produto.getQuantidade();
 			PreparedStatement st = conexao.prepareStatement(sql);
-		    st.setTimestamp(1, Timestamp.valueOf(produto.getDataFabricacao()));
-			st.setDate(2, Date.valueOf(produto.getDataValidade()));
 			st.executeUpdate();
 			st.close();
 			status = true;
@@ -125,7 +114,6 @@ public class ProdutoDAO extends DAO {
 		}
 		return status;
 	}
-	
 	
 	public boolean delete(int id) {
 		boolean status = false;
