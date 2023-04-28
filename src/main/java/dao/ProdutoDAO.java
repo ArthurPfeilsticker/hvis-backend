@@ -25,14 +25,8 @@ public class ProdutoDAO extends DAO {
 	public boolean insert(Produto produto) {
 		boolean status = false;
 		try {
-<<<<<<< HEAD
-			String sql = "INSERT INTO produto (descricao, preco, quantidade, nome) "
-		               + "VALUES ('" + produto.getDescricao() + "', "
-		               + produto.getPreco() + ", " + produto.getQuantidade() + ", '" + produto.getNome() + "');";
-=======
 			String sql = "INSERT INTO produto (id,nome,descricao, preco, quantidade) "
 		        + "VALUES ('" produto.getID() + ", " + produto.getNome() + ", " + produto.getDescricao() + "', " + produto.getPreco() + ", " + produto.getQuantidade() + ", ?, ?);";
->>>>>>> 2bd5aa5a5d912cb47069330218a5bd29bd7fd3b3
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.executeUpdate();
 			st.close();
@@ -52,12 +46,7 @@ public class ProdutoDAO extends DAO {
 			String sql = "SELECT * FROM produto WHERE id = "+id;
 			ResultSet rs = st.executeQuery(sql);	
 	        if(rs.next()){            
-<<<<<<< HEAD
-	        	 produto = new Produto(rs.getInt("id"), rs.getString("nome"), (float)rs.getDouble("preco"), 
-	                				   rs.getInt("quantidade"),rs.getString("descricao"));
-=======
 	        	produto = new Produto(rs.getInt("id"), rs.getNome("nome"), rs.getString("descricao"), (float)rs.getDouble("preco"), rs.getInt("quantidade"));
->>>>>>> 2bd5aa5a5d912cb47069330218a5bd29bd7fd3b3
 	        }
 	        st.close();
 		} catch (Exception e) {
@@ -99,12 +88,7 @@ public class ProdutoDAO extends DAO {
 			String sql = "SELECT * FROM produto" + ((orderBy.trim().length() == 0) ? "" : (" ORDER BY " + orderBy));
 			ResultSet rs = st.executeQuery(sql);	           
 	        while(rs.next()) {	            	
-<<<<<<< HEAD
-	        	Produto p = new Produto(rs.getInt("id"), rs.getString("nome"), (float)rs.getDouble("preco"), 
-				rs.getInt("quantidade"),rs.getString("descricao"));
-=======
 	        	Produto p = new Produto(rs.getInt("id"), rs.getNome("nome"), rs.getString("descricao"), (float)rs.getDouble("preco"), rs.getInt("quantidade"));
->>>>>>> 2bd5aa5a5d912cb47069330218a5bd29bd7fd3b3
 	            produtos.add(p);
 	        }
 	        st.close();
@@ -118,15 +102,7 @@ public class ProdutoDAO extends DAO {
 	public boolean update(Produto produto) {
 		boolean status = false;
 		try {  
-<<<<<<< HEAD
-			String sql = "UPDATE produto SET descricao = '" + produto.getDescricao() + "', "
-					   + "preco = " + produto.getPreco() + ", " 
-					   + "quantidade = " + produto.getQuantidade() + ", "
-					   + "nome = " + produto.getNome() + ", " 
-					   + "WHERE id = " + produto.getId();
-=======
 			String sql =  "UPDATE produto SET nome = '" + produto.getNome() + "', descricao = "  + produto.getDescricao()  + "', preco = " + produto.getPreco() + ", quantidade = " + produto.getQuantidade();
->>>>>>> 2bd5aa5a5d912cb47069330218a5bd29bd7fd3b3
 			PreparedStatement st = conexao.prepareStatement(sql);
 			st.executeUpdate();
 			st.close();
@@ -137,12 +113,7 @@ public class ProdutoDAO extends DAO {
 		return status;
 	}
 	
-<<<<<<< HEAD
-	
-	public Produto delete(int id) {
-=======
 	public boolean delete(int id) {
->>>>>>> 2bd5aa5a5d912cb47069330218a5bd29bd7fd3b3
 		boolean status = false;
 		Produto product = null;
 		try {
